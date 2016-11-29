@@ -1,0 +1,11 @@
+---
+pipeline: "maven/BuildImage/Jenkinsfile"
+buildName: "sample-ms-swarm"
+codeReview: false
+links:
+  Current: "http://172.30.133.226:80/kubernetes/pods?namespace=default"
+  Git: "http://192.168.64.2:31274/gogsadmin/sample-ms-swarm.git"
+  Job: "http://192.168.64.2:30195/job/sample-ms-swarm"
+environments:
+  Current: "default"
+useLocalFlow: true
