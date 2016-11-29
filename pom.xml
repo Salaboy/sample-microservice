@@ -7,6 +7,13 @@
   <packaging>war</packaging>
   <build>
     <finalName>sample-ms-swarm</finalName>
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-webdav-jackrabbit</artifactId>
+        <version>2.10</version>
+      </extension>
+    </extensions>
     <plugins>
       <plugin>
         <groupId>org.wildfly.swarm</groupId>
@@ -25,6 +32,20 @@
           </properties>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>fabric8-maven-plugin</artifactId>
+        <version>3.1.92</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>resource</goal>
+              <goal>build</goal>
+              <goal>helm</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
   <properties>
@@ -40,6 +61,19 @@
       <artifactId>jaxrs-cdi</artifactId>
     </dependency>
   </dependencies>
+  <reporting>
+    <plugins>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.10.3</version>
+        <configuration>
+          <detectLinks>true</detectLinks>
+          <detectJavaApiLink>true</detectJavaApiLink>
+          <linksource>true</linksource>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -51,4 +85,10 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+  <distributionManagement>
+    <site>
+      <id>website</id>
+      <url>dav:http://content-repository/sites/${project.groupId}/${project.artifactId}/${project.version}</url>
+    </site>
+  </distributionManagement>
 </project>
